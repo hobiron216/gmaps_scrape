@@ -21,14 +21,14 @@ def scrape_paid(lat, long, radius, category  ):
         if loop2 > 5:
             break
         if next_page_token:
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken="+str(next_page_token)+"&key=AIzaSyDypiRJ2xKH3qpOMs_iFefikOfj7-P8eo8"
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken="+str(next_page_token)+"&key=API_KEY"
             response_first = requests.get(url)
         else:
             params = {
                 'location': location,
                 'radius': radius,
                 'type': category,
-                'key': 'AIzaSyDypiRJ2xKH3qpOMs_iFefikOfj7-P8eo8',
+                'key': 'API_KEY',
                 # 'language' : 'language',
                 # 'keyword': 'cruise',
             }
@@ -44,7 +44,7 @@ def scrape_paid(lat, long, radius, category  ):
 
             headers = {
                 'Content-Type': 'application/json',
-                'X-Goog-Api-Key': 'AIzaSyDypiRJ2xKH3qpOMs_iFefikOfj7-P8eo8',
+                'X-Goog-Api-Key': 'API_KEY',
                 'X-Goog-FieldMask': '*',
                 # 'X-Goog-FieldMask': 'photos,displayName,reviews,types,googleMapsUri,websiteUri,nationalPhoneNumber,shortFormattedAddress,currentOpeningHours',
             }
@@ -60,7 +60,7 @@ def scrape_paid(lat, long, radius, category  ):
                     photo_reference = photo['name'].split('photos/')[1]
                     author = photo['authorAttributions'][0]['displayName']
                     if displayName == author:
-                        response_photo = requests.get("https://maps.googleapis.com/maps/api/place/photo?maxwidth=1280&photo_reference="+photo_reference+"&key=AIzaSyDypiRJ2xKH3qpOMs_iFefikOfj7-P8eo8")
+                        response_photo = requests.get("https://maps.googleapis.com/maps/api/place/photo?maxwidth=1280&photo_reference="+photo_reference+"&key=API_KEY")
                         data_photo.append(response_photo.url)
             except:
                 pass
