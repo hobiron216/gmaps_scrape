@@ -45,6 +45,8 @@ def hello():
 def crawl():
     keyword = request.args.get('keyword')
     category = request.args.get('category')
+    lat = request.args.get('lat')
+    long = request.args.get('long')
     languange = 'en'
 
     error = ''
@@ -52,6 +54,10 @@ def crawl():
         error = "field keyword should be exist"
     elif not category:
         error = "field category should be exist"
+    elif not lat :
+        error = "field lat should be exist"
+    elif not long:
+        error = "field long should be exist"
 
     if error :
         response = {
@@ -61,7 +67,7 @@ def crawl():
 
         return response
     else :
-        data = scrape(keyword, languange, category)
+        data = scrape(keyword, languange, category,lat, long)
         response = {
             "success": True,
             "error": error,
